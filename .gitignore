@@ -37,3 +37,7 @@ Thumbs.db
 # Db
 db.sqlite
 /searxng
+embeddingModel
+embeddingModelProvider
+focusMode
+query
