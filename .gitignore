@@ -41,3 +41,5 @@ embeddingModel
 embeddingModelProvider
 focusMode
 query
+db.sqlite
+backups/
