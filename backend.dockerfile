@@ -13,7 +13,19 @@ RUN mkdir /home/perplexica/uploads
 
 RUN yarn install --frozen-lockfile --network-timeout 600000
 RUN yarn build
-# Instalar utilitários essenciais para debug
-RUN apt-get update && apt-get install -y procps net-tools lsof && rm -rf /var/lib/apt/lists/*
+
+# 🔧 Instalar ferramentas de debug essenciais
+RUN apt-get update && apt-get install -y \
+    procps \
+    net-tools \
+    lsof \
+    curl \
+    vim \
+    nano \
+    tcpdump \
+    strace \
+    netcat-openbsd \
+    htop \
+    && rm -rf /var/lib/apt/lists/*
 
 CMD ["yarn", "start"]

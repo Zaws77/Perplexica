@@ -46,9 +46,25 @@ services:
       - perplexica-network
     restart: unless-stopped
 
+  # Serviço do Neo4j (mantido para futura implementação)
+  neo4j:
+    image: neo4j:latest
+    container_name: perplexica_neo4j
+    restart: always
+    ports:
+      - "7474:7474"   # Interface web
+      - "7687:7687"   # Bolt protocol (para conexões)
+    environment:
+      - NEO4J_AUTH=none  # Altere depois
+    volumes:
+      - neo4j_data:/data
+    networks:
+      - perplexica-network
+
 networks:
   perplexica-network:
 
 volumes:
   backend-dbstore:
   uploads:
+  neo4j_data:
