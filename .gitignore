@@ -43,3 +43,5 @@ focusMode
 query
 db.sqlite
 backups/
+src/routes/temp_routes
+__pycache__/

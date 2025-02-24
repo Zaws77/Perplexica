@@ -16,6 +16,13 @@ services:
     image: itzcrazykns1337/perplexica-backend:main
     environment:
       - SEARXNG_API_URL=http://searxng:8080
+      - POSTGRES_HOST=host.docker.internal  # Aponta para o PostgreSQL isolado
+      - POSTGRES_PORT=5434                   # Porta do PostgreSQL isolado
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin_pass
+      - POSTGRES_DB=projeto_db
+      - REDIS_HOST=host.docker.internal      # Aponta para o Redis isolado
+      - REDIS_PORT=6380                      # Porta do Redis isolado
     depends_on:
       - searxng
     ports:
@@ -25,7 +32,7 @@ services:
       - uploads:/home/perplexica/uploads
       - ./config.toml:/home/perplexica/config.toml
     extra_hosts:
-      - 'host.docker.internal:host-gateway'
+      - 'host.docker.internal:host-gateway'  # Permite comunicação com o host
     networks:
       - perplexica-network
     restart: unless-stopped
@@ -46,7 +53,6 @@ services:
       - perplexica-network
     restart: unless-stopped
 
-  # Serviço do Neo4j (mantido para futura implementação)
   neo4j:
     image: neo4j:latest
     container_name: perplexica_neo4j
@@ -55,7 +61,7 @@ services:
       - "7474:7474"   # Interface web
       - "7687:7687"   # Bolt protocol (para conexões)
     environment:
-      - NEO4J_AUTH=none  # Altere depois
+      - NEO4J_AUTH=none
     volumes:
       - neo4j_data:/data
     networks:
